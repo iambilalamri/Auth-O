@@ -24,6 +24,13 @@ const Register = () => {
   const timesIcon = <FaTimes color="red" size={15} />;
   const checkIcon = <BsCheck2All color="green" size={15} />;
 
+  const switchIcon = (condition) => {
+    if (condition) {
+      return checkIcon;
+    }
+    return timesIcon;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -73,7 +80,25 @@ const Register = () => {
               <ul className="form-list">
                 <li>
                   <span className={classes.indicator}>
-                    {uCase ? checkIcon : timesIcon}
+                    {switchIcon(uCase)}
+                    &nbsp; Lowercase & Uppercase
+                  </span>
+                </li>
+                <li>
+                  <span className={classes.indicator}>
+                    {switchIcon(num)}
+                    &nbsp; Numbers [0-9]
+                  </span>
+                </li>
+                <li>
+                  <span className={classes.indicator}>
+                    {switchIcon(sChar)}
+                    &nbsp; Lowercase & Uppercase
+                  </span>
+                </li>
+                <li>
+                  <span className={classes.indicator}>
+                    {switchIcon(passLength)}
                     &nbsp; Lowercase & Uppercase
                   </span>
                 </li>
