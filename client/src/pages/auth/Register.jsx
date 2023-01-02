@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { TiUserAddOutline } from "react-icons/ti";
 import { BsCheck2All } from "react-icons/bs";
@@ -16,6 +16,7 @@ const initialState = {
 
 const Register = () => {
   const [formData, setFormData] = useState(initialState);
+  const { name, email, password, confirmPassword } = formData;
   const [uCase, setUCase] = useState(false);
   const [num, setNum] = useState(false);
   const [sChar, setSChar] = useState(false);
@@ -40,6 +41,33 @@ const Register = () => {
     e.preventDefault();
     console.log("Submitted");
   };
+
+  useEffect(() => {
+    // Check Lower and Uppercase
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
+      setUCase(true);
+    } else {
+      setUCase(false);
+    }
+    // Check for numbers
+    if (password.match(/([0-9])/)) {
+      setNum(true);
+    } else {
+      setNum(false);
+    }
+    // Check for special character
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+      setSChar(true);
+    } else {
+      setSChar(false);
+    }
+    // Check for PASSWORD LENGTH
+    if (password.length > 5) {
+      setPassLength(true);
+    } else {
+      setPassLength(false);
+    }
+  }, [password]);
 
   return (
     <div className={`container ${classes.auth}`}>
@@ -93,13 +121,13 @@ const Register = () => {
                 <li>
                   <span className={classes.indicator}>
                     {switchIcon(sChar)}
-                    &nbsp; Lowercase & Uppercase
+                    &nbsp; Special Character (!@#$%^&*)
                   </span>
                 </li>
                 <li>
                   <span className={classes.indicator}>
                     {switchIcon(passLength)}
-                    &nbsp; Lowercase & Uppercase
+                    &nbsp; At least 8 characters
                   </span>
                 </li>
               </ul>
