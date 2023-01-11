@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Forgot from "./pages/auth/Forgot";
 import Login from "./pages/auth/Login";
+import LoginWCode from "./pages/auth/LoginWCode";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
 import Home from "./pages/home/Home";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/resetPassword/:resetToken" element={<Reset />} />
+          <Route path="/loginWithCode/:email" element={<LoginWCode />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
